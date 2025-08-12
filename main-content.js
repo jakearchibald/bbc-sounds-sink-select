@@ -14,20 +14,10 @@ async function setupIframePermissions() {
   await loadPromise;
 }
 
-// browser.runtime.onMessage.addListener((message, sender, sendResponse) => {
-//   if (message.action === "run-set-iframe-permissions") {
-//     setupIframePermissions().then(() => {
-//       console.log("IFrame permissions set");
-//       sendResponse("hey");
-//     });
-//     return true;
-//   }
-// });
-
-browser.runtime.onMessage.addListener(async (message, sender, sendResponse) => {
+browser.runtime.onMessage.addListener((message, sender, sendResponse) => {
   if (message.action === "run-set-iframe-permissions") {
-    await setupIframePermissions();
-    console.log("IFrame permissions set");
-    return "hey";
+    return (async () => {
+      await setupIframePermissions();
+    })();
   }
 });

@@ -3,7 +3,6 @@ async function runSinkSelect() {
   document.addEventListener(
     "click",
     async () => {
-      console.log("Got click");
       const { deviceId } = await navigator.mediaDevices.selectAudioOutput();
       const audio = document.querySelector("audio");
       if (audio && audio.setSinkId) {
@@ -14,8 +13,10 @@ async function runSinkSelect() {
   );
 }
 
-browser.runtime.onMessage.addListener(async (message, sender, sendResponse) => {
+browser.runtime.onMessage.addListener((message, sender, sendResponse) => {
   if (message.action === "run-iframe-sink-select") {
-    await runSinkSelect();
+    return (async () => {
+      await runSinkSelect();
+    })();
   }
 });
