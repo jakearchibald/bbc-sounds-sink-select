@@ -1,0 +1,23 @@
+{
+  "manifest_version": 3,
+  "name": "BBC Sound Sink Select",
+  "version": "1.0",
+  "background": {
+    "scripts": ["background.js"]
+  },
+  "action": {
+    "default_title": "Run BBC Sound Sink Select"
+  },
+  "content_scripts": [
+    {
+      "matches": ["https://www.bbc.co.uk/sounds/*"],
+      "js": ["main-content.js"]
+    },
+    {
+      "matches": ["https://emp.bbc.co.uk/emp/*"],
+      "js": ["iframe-content.js"],
+      "all_frames": true
+    }
+  ],
+  "permissions": ["scripting", "activeTab"]
+}
