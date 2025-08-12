@@ -3,6 +3,5 @@
 
 chrome.action.onClicked.addListener(async (tab) => {
   await chrome.tabs.sendMessage(tab.id, { action: "run-sink-select" });
-  await new Promise((resolve) => setTimeout(resolve, 1000));
   await chrome.tabs.sendMessage(tab.id, { action: "run-iframe-sink-select" });
 });
